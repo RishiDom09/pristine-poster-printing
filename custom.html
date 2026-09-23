@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Your Custom Poster | Pristine Poster Printing</title>
+  <link rel="icon" type="image/png" href="img/mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page-top">
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo"><img src="img/logo.png" alt="Pristine Poster Printing - Print Your Visions"></a>
+      <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <span class="divider"></span>
+        <a href="custom.html" class="btn btn-primary btn-sm active">Upload Your Poster</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow spaced">Custom order</span>
+        <h2>Upload your poster</h2>
+        <p>Send us your image and we'll print it. Accepted files: PNG, JPG, WEBP, or PDF up to 25 MB.</p>
+      </div>
+
+      <div id="order-form-wrap" class="order-layout">
+        <form id="order-form" class="card form" enctype="multipart/form-data" novalidate>
+          <div id="form-error" class="alert alert-error"></div>
+
+          <div>
+            <label>1. Your poster file</label>
+            <div id="dropzone" class="dropzone">
+              <input type="file" id="poster" name="poster" accept=".png,.jpg,.jpeg,.webp,.pdf,image/png,image/jpeg,image/webp,application/pdf" required>
+              <div class="dz-icon">📤</div>
+              <div><strong>Click to choose a file</strong> or drag and drop it here</div>
+              <div class="help">For best quality, use an image at least 2000 pixels on the long side.</div>
+            </div>
+            <div id="preview" class="preview">
+              <div id="preview-content"></div>
+              <div class="file-meta" id="file-meta"></div>
+              <button type="button" class="btn btn-outline btn-sm" id="remove-file" style="margin-top:10px;">Choose a different file</button>
+            </div>
+          </div>
+
+          <div>
+            <label>2. Poster options</label>
+            <div class="form-row">
+              <div>
+                <label for="size">Size</label>
+                <select id="size" name="size" required>
+                  <option value="11x17">11" x 17" (Small) - $12</option>
+                  <option value="18x24" selected>18" x 24" (Medium) - $20</option>
+                  <option value="24x36">24" x 36" (Large) - $32</option>
+                </select>
+              </div>
+              <div>
+                <label for="finish">Finish</label>
+                <select id="finish" name="finish" required>
+                  <option value="matte">Matte (included)</option>
+                  <option value="glossy">Glossy (+$3)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row" style="margin-top:14px;">
+              <div>
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required>
+              </div>
+              <div style="display:flex; align-items:flex-end;">
+                <label class="checkbox"><input type="checkbox" id="laminate" name="laminate"> Add lamination (+$5 each)</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label>3. Your details</label>
+            <div class="form-row">
+              <div>
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+              </div>
+            </div>
+            <div style="margin-top:14px;">
+              <label for="phone">Phone (optional)</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
+            </div>
+            <div style="margin-top:14px;">
+              <label for="notes">Notes for us (optional)</label>
+              <textarea id="notes" name="notes" placeholder="Anything we should know? Cropping preferences, pickup time, etc."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submit-btn">Submit Order</button>
+        </form>
+
+        <aside class="card summary">
+          <h3>Order summary</h3>
+          <div class="summary-row"><span>Size</span><span id="sum-size">18" x 24"</span></div>
+          <div class="summary-row"><span>Finish</span><span id="sum-finish">Matte</span></div>
+          <div class="summary-row"><span>Lamination</span><span id="sum-lam">No</span></div>
+          <div class="summary-row"><span>Quantity</span><span id="sum-qty">1</span></div>
+          <div class="summary-row total"><span>Total</span><span id="sum-total">$20.00</span></div>
+          <p class="help" style="margin-top:14px;">Payment is collected when you pick up your poster. We'll email you a confirmation.</p>
+        </aside>
+      </div>
+
+      <div id="order-success" class="card success-panel" style="display:none;">
+        <div class="big">🎉</div>
+        <h2>Order received!</h2>
+        <p>Your order number is <code id="success-id"></code>.</p>
+        <p class="muted" id="success-detail"></p>
+        <p class="muted">We'll email you when your poster is ready.</p>
+        <a href="custom.html" class="btn btn-outline">Place another order</a>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="footer-logo"><img src="img/logo.png" alt="Pristine Poster Printing"></a>
+          <p>1280 Johnson Ave<br>San Jose, CA 95129</p>
+          <p><a href="tel:4089130756" style="display:inline;">408-913-0756</a><br>
+             <a href="mailto:info@pristineposters.com" style="display:inline;">info@pristineposters.com</a><br>
+             <a href="https://www.pristineposters.com" style="display:inline;">www.pristineposters.com</a></p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="index.html">Home</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>Order</h4>
+          <a href="custom.html">Upload a custom poster</a>
+          <a href="pricing.html">Sizes &amp; add-ons</a>
+          <a href="contact.html">Bulk orders</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="spaced rule-text">Print Your Visions</div>
+        <div class="footer-slogan">Posters<br>Bring Ideas<br>To Life</div>
+      </div>
+      <div class="copy">&copy; 2026 Pristine Poster Printing. A student-run business.</div>
+    </div>
+  </footer>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/order.js"></script>
+</body>
+</html>
